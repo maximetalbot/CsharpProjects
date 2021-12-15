@@ -28,5 +28,18 @@ namespace PremierSite.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult Bonjour()
+        {
+            return View();
+        }
+        [Route("Bienvenue/{nom}")]
+        public IActionResult Welcome(string nom)
+        {
+            ViewBag.Nom = nom;
+            return View();
+        }
+
+
     }
 }

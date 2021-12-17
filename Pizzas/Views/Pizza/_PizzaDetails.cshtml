@@ -1,0 +1,32 @@
+﻿@model BO.Pizza
+
+<h4>Pizza</h4>
+<hr />
+<dl class="row">
+    <dt class = "col-sm-2">
+        @Html.DisplayNameFor(model => model.Id)
+    </dt>
+    <dd class = "col-sm-10">
+        @Html.DisplayFor(model => model.Id)
+    </dd>
+    <dt class = "col-sm-2">
+        @Html.DisplayNameFor(model => model.Nom)
+    </dt>
+    <dd class = "col-sm-10">
+        @Html.DisplayFor(model => model.Nom)
+    </dd>
+    <dt class = "col-sm-2">
+        @Html.DisplayNameFor(model => model.Pate)
+    </dt>
+    <dd class = "col-sm-10">
+        @Html.DisplayFor(model => model.Pate)
+    </dd>
+
+    <dt class = "col-sm-2">
+        @Html.DisplayNameFor(model => model.Ingredients)
+    </dt>
+    <dd class = "col-sm-10">
+        @Html.DisplayFor(model => model.Ingredients)
+    </dd>
+
+</dl>

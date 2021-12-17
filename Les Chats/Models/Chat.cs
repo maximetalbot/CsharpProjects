@@ -18,7 +18,7 @@
                 new Chat{Id=i++,Nom = "Garfield",Age = 6,Couleur = "Gris"},
                 new Chat{Id=i++,Nom = "Chatran",Age = 4,Couleur = "Fauve"},
                 new Chat{Id=i++,Nom = "Minou",Age = 2,Couleur = "Blanc"},
-                new Chat{Id=i,Nom = "Bichette",Age = 12,Couleur = "Rousse"}
+                new Chat{Id=i++,Nom = "Bichette",Age = 12,Couleur = "Rousse"}
             };
         }
     }

@@ -1,0 +1,16 @@
+﻿@model BO.Pizza
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Voulez vous vraiment supprimer la @Model.Nom ?</h3>
+<div>
+    @Html.Partial("_PizzaDetails",Model)
+    <form asp-action="Delete">
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

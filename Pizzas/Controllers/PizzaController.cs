@@ -21,12 +21,12 @@ namespace Pizzas.Controllers
             {
                 pizzas = new List<Pizza> 
                 {
-                    new Pizza {Id = i++, Nom = "Margherita", Pate = pates[random.Next(1, 4)]},
-                    new Pizza {Id = i++, Nom = "Reine", Pate = pates[random.Next(1, 4)]},
-                    new Pizza {Id = i++, Nom = "Napolitaine", Pate = pates[random.Next(1, 4)]},
-                    new Pizza {Id = i++, Nom = "Calzone", Pate = pates[random.Next(1, 4)]},
-                    new Pizza {Id = i++, Nom = "Royale", Pate = pates[random.Next(1, 4)]},
-                    new Pizza {Id = i++, Nom = "Veggie", Pate = pates[random.Next(1, 4)]},
+                    new Pizza {Id = i++, Nom = "Margherita", Pate = pates[random.Next(1, 4)], Ingredients = new List<Ingredient>(Pizza.IngredientsDisponibles.FindIndex(a => a.Id == random.Next(1,8))) },
+                    //new Pizza {Id = i++, Nom = "Reine", Pate = pates[random.Next(1, 4)]},
+                    //new Pizza {Id = i++, Nom = "Napolitaine", Pate = pates[random.Next(1, 4)]},
+                    //new Pizza {Id = i++, Nom = "Calzone", Pate = pates[random.Next(1, 4)]},
+                    //new Pizza {Id = i++, Nom = "Royale", Pate = pates[random.Next(1, 4)]},
+                    //new Pizza {Id = i++, Nom = "Veggie", Pate = pates[random.Next(1, 4)]},
                     //new Pizza {Id = i++, Nom = "Paysanne", Pate = pates[new Random().Next(1, 4)]},
                     //new Pizza {Id = i++, Nom = "Forestière", Pate = pates[new Random().Next(1, 4)]},
                     //new Pizza {Id = i++, Nom = "Alsacienne", Pate = pates[new Random().Next(1, 4)]},
@@ -58,7 +58,7 @@ namespace Pizzas.Controllers
         // GET: PizzaController/Details/5
         public ActionResult Details(int id)
         {
-            var pizza = pizzas[id];
+            var pizza = pizzas[id-1];
             if (pizza != null)
             {
                 return View(pizza);
@@ -75,11 +75,16 @@ namespace Pizzas.Controllers
         // POST: PizzaController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Pizza pizza)
         {
             try
             {
-
+                var pizzaDb = new Pizza();
+                pizzaDb.Id = pizzas.Count+1;
+                pizzaDb.Nom = pizza.Nom;
+                pizzaDb.Pate = pizza.Pate;
+                pizzaDb.Ingredients = pizza.Ingredients;
+                pizzas.Add(pizzaDb);
                 return RedirectToAction(nameof(Index));
             }
             catch

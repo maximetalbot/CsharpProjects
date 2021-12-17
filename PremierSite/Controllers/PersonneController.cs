@@ -87,13 +87,24 @@ namespace PremierSite.Controllers
             // Au click sur SAVE, l'objet personne est reconstitué à partir du formulaire, les valeurs sont les mêmes mais ce n'est pas le même objet. Copie temporaire.
             try
             {
-                var personneDb = personnes.FirstOrDefault(p => p.Id == personne.Id);
-                // On met à jour les valeures
-                personneDb.Nom = personne.Nom;
-                personneDb.Prenom = personne.Prenom;
-                personneDb.Age = personne.Age;
+                if (ModelState.IsValid)
+                {
+                    // Existe-t-il deja une personne ayant le même nom et prénom mais ID différent
+                    if(personnes.Any(p => p.Nom.ToUpper() == personne.Nom.ToUpper() &&
+                    p.Prenom.ToUpper() == personne.Prenom.ToUpper() && personne.Id != p.Id))
+                    {
+                        ModelState.AddModelError("", "Il éxiste deja une personne portant ce nom et ce prénom.");
+                        return View();
+                    }
+                    var personneDb = personnes.FirstOrDefault(p => p.Id == personne.Id);
+                    // On met à jour les valeures
+                    personneDb.Nom = personne.Nom;
+                    personneDb.Prenom = personne.Prenom;
+                    personneDb.Age = personne.Age;
 
-                return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Index));
+                }
+                return View();
             }
             catch
             {

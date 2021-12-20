@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using BO;
+using Pizzas.Models;
 
 namespace Pizzas.Controllers
 {
@@ -17,11 +18,12 @@ namespace Pizzas.Controllers
         {
             var i = 1;
             Random random = new Random();
+            var ingredientAleatoire = Pizza.IngredientsDisponibles.Find(a => a.Id == random.Next(1, Pizza.IngredientsDisponibles.Count()));
             if (pizzas == null)
             {
                 pizzas = new List<Pizza> 
                 {
-                    new Pizza {Id = i++, Nom = "Margherita", Pate = pates[random.Next(1, 4)], Ingredients = new List<Ingredient>(Pizza.IngredientsDisponibles.FindIndex(a => a.Id == random.Next(1,8))) },
+                    new Pizza {Id = i++, Nom = "Margherita", Pate = pates[random.Next(1, 4)], Ingredients = new List<Ingredient>{ ingredientAleatoire, ingredientAleatoire, ingredientAleatoire } },
                     //new Pizza {Id = i++, Nom = "Reine", Pate = pates[random.Next(1, 4)]},
                     //new Pizza {Id = i++, Nom = "Napolitaine", Pate = pates[random.Next(1, 4)]},
                     //new Pizza {Id = i++, Nom = "Calzone", Pate = pates[random.Next(1, 4)]},
@@ -79,13 +81,17 @@ namespace Pizzas.Controllers
         {
             try
             {
-                var pizzaDb = new Pizza();
-                pizzaDb.Id = pizzas.Count+1;
-                pizzaDb.Nom = pizza.Nom;
-                pizzaDb.Pate = pizza.Pate;
-                pizzaDb.Ingredients = pizza.Ingredients;
-                pizzas.Add(pizzaDb);
-                return RedirectToAction(nameof(Index));
+                if (pizza != null && ModelState.IsValid)
+                {
+                    var pizzaDb = new Pizza();
+                    pizzaDb.Id = pizzas.Count + 1;
+                    pizzaDb.Nom = pizza.Nom;
+                    pizzaDb.Pate = pizza.Pate;
+                    pizzaDb.Ingredients = pizza.Ingredients;
+                    pizzas.Add(pizzaDb);
+                    return RedirectToAction(nameof(pizza));
+                }
+                return View();
             }
             catch
             {
@@ -97,6 +103,7 @@ namespace Pizzas.Controllers
         public ActionResult Edit(int id)
         {
             var pizza = pizzas.FirstOrDefault(p => p.Id == id);
+            List<Ingredient> ListeIngredients = pizza.Ingredients;
             if (pizza != null)
             {
                 return View(pizza);
@@ -111,12 +118,21 @@ namespace Pizzas.Controllers
         {
             try
             {
-                var pizzaDb = pizzas.FirstOrDefault(p => p.Id == pizza.Id);
-                // On met à jour les valeures
-                pizzaDb.Nom = pizza.Nom;
-                pizzaDb.Pate = pizza.Pate;
-                pizzaDb.Ingredients = pizza.Ingredients;
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    var pizzaVM = new PizzaVM();
+
+                    var pizzaDb = pizzas.FirstOrDefault(p => p.Id == pizza.Id);
+
+                    List<Ingredient> ListeIngredients = pizza.Ingredients;
+
+                    pizzaDb.Nom = pizza.Nom;
+                    pizzaDb.Pate = pizza.Pate;
+                    pizzaDb.Ingredients = pizza.Ingredients;
+                    return RedirectToAction(nameof(Index));
+                }
+
+                return View();
             }
             catch
             {

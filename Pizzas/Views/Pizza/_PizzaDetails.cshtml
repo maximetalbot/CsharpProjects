@@ -24,16 +24,16 @@
         @Html.DisplayFor(model => model.Pate.Nom)
     </dd>
 
-    @foreach(var ingredient in Model.Ingredients)
-    {
-        <p>@ingredient.Nom</p>
-    }
 
-@*    <dt class = "col-sm-2">
-        @Html.DisplayNameFor(model => model.Ingredients)
+    <dt class = "col-sm-2">
+        @Html.DisplayNameFor(model => Model.Ingredients)
     </dt>
+@*        @foreach(var ingredient in Model.Ingredients)
+        {
+            <p>@ingredient.Nom</p>
+        }*@
     <dd class = "col-sm-10">
-        @Html.DisplayFor(model => model.Ingredients)
-    </dd>*@
+        @*@Html.DisplayFor(model => model.Ingredients)*@
+    </dd>
 
 </dl>

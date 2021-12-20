@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using BO;
 using Pizzas.Models;
+using System.Linq;
 
 namespace Pizzas.Controllers
 {
@@ -11,19 +12,29 @@ namespace Pizzas.Controllers
         static List<Pizza> pizzas;
         static List<Pate> pates = Pizza.PatesDisponibles;
         static List<Ingredient> ingredients = Pizza.IngredientsDisponibles;
-        
         #endregion
+
+        // Génération de la liste d'ingrédients aléatoires
+        private List<Ingredient> Aleatoire()
+        {
+            Random random = new Random();
+            List<Ingredient> ingredientAleatoire = new List<Ingredient>();
+            for (int j = 0; j < random.Next(2, 5); j++)
+            {
+                ingredientAleatoire.Add(Pizza.IngredientsDisponibles.Find(a => a.Id == random.Next(1, Pizza.IngredientsDisponibles.Count)));
+            }
+            return ingredientAleatoire;
+        }
 
         public PizzaController()
         {
             var i = 1;
             Random random = new Random();
-            var ingredientAleatoire = Pizza.IngredientsDisponibles.Find(a => a.Id == random.Next(1, Pizza.IngredientsDisponibles.Count()));
             if (pizzas == null)
             {
                 pizzas = new List<Pizza> 
                 {
-                    new Pizza {Id = i++, Nom = "Margherita", Pate = pates[random.Next(1, 4)], Ingredients = new List<Ingredient>{ ingredientAleatoire, ingredientAleatoire, ingredientAleatoire } },
+                    new Pizza {Id = i++, Nom = "Margherita", Pate = pates[random.Next(1, 4)], Ingredients = Aleatoire() },
                     //new Pizza {Id = i++, Nom = "Reine", Pate = pates[random.Next(1, 4)]},
                     //new Pizza {Id = i++, Nom = "Napolitaine", Pate = pates[random.Next(1, 4)]},
                     //new Pizza {Id = i++, Nom = "Calzone", Pate = pates[random.Next(1, 4)]},
@@ -71,25 +82,29 @@ namespace Pizzas.Controllers
         // GET: PizzaController/Create
         public ActionResult Create()
         {
-            return View();
+            // On alimente le VM avec ce que l'on veut afficher dans la vue
+            var pizzaVM = new PizzaVM();
+            pizzaVM.Pates = pates;
+            pizzaVM.Ingredients = ingredients;
+            return View(pizzaVM);
         }
 
         // POST: PizzaController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Pizza pizza)
+        public ActionResult Create(PizzaVM pizzaVM)
         {
             try
             {
-                if (pizza != null && ModelState.IsValid)
+                if (pizzaVM != null && ModelState.IsValid)
                 {
                     var pizzaDb = new Pizza();
-                    pizzaDb.Id = pizzas.Count + 1;
-                    pizzaDb.Nom = pizza.Nom;
-                    pizzaDb.Pate = pizza.Pate;
-                    pizzaDb.Ingredients = pizza.Ingredients;
+                    //pizzaDb.Id = pizzas.Count + 1;
+                    pizzaDb.Nom = pizzaVM.Nom;
+                    //pizzaDb.Pate = pizzaVM.SelectionPate;
+                    //pizzaDb.Ingredients = pizzaVM.SelectionIngredients;
                     pizzas.Add(pizzaDb);
-                    return RedirectToAction(nameof(pizza));
+                    return RedirectToAction(nameof(Index));
                 }
                 return View();
             }

@@ -1,6 +1,5 @@
 ﻿@using BO
-@model BO.Pizza
-@*@model Pizzas.Models.PizzaVM*@
+@model Pizzas.Models.PizzaVM
 
 @{
     var choixPate = Pizza.PatesDisponibles;
@@ -8,27 +7,26 @@
 }
 
     <div class="form-group">
-        <label asp-for="Id" class="control-label"></label>
-        <input asp-for="Id" class="form-control" />
-        <span asp-validation-for="Id" class="text-danger"></span>
+        <label asp-for=@Model.Id class="control-label"></label>
+        <input asp-for=@Model.Id class="form-control" />
+        <span asp-validation-for=@Model.Id class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="Nom" class="control-label"></label>
-        <input asp-for="Nom" class="form-control" />
-        <span asp-validation-for="Nom" class="text-danger"></span>
+        <label asp-for=@Model.Nom class="control-label"></label>
+        <input asp-for=@Model.Nom class="form-control" />
+        <span asp-validation-for=@Model.Nom class="text-danger"></span>
     </div>
 
     <!--Choix de la pâte-->
     <div class="form-group">
-        @*<label asp-for="Pate" class="control-label"></label>*@
-        @Html.LabelFor(model => model.Pate, htmlAttributes: new {@class="control-label col-md-2"})
-        @Html.DropDownListFor(p => p.Pate, choixPate.Select(p => new SelectListItem{ Text = p.Nom, Value = p.Id.ToString()}))
-        @Html.ValidationMessageFor(p => p.Pate, "", new { @class = "text-danger"})
+        @Html.LabelFor(model => model.SelectionPate, htmlAttributes: new {@class="control-label col-md-2"})
+        @Html.DropDownListFor(p => p.SelectionPate, choixPate.Select(p => new SelectListItem{ Text = p.Nom, Value = p.Id.ToString()}))
+        @Html.ValidationMessageFor(p => p.SelectionPate, "", new { @class = "text-danger"})
     </div>
 
     <!--Choix des ingrédients-->
     <div class="form-group">
-        @Html.LabelFor(model => model.Ingredients, htmlAttributes: new { @class="control-label col-md-2" })
-        @Html.ListBoxFor(i => i.Ingredients, ingredients.Select(i => new SelectListItem{ Text = i.Nom, Value = i.Id.ToString() }))
-        @Html.ValidationMessageFor(i => i.Ingredients, "", new { @class = "text-danger"})
+        @Html.LabelFor(model => model.SelectionIngredients, htmlAttributes: new { @class="control-label col-md-2" })
+        @Html.ListBoxFor(i => i.SelectionIngredients, ingredients.Select(i => new SelectListItem{ Text = i.Nom, Value = i.Id.ToString() }))
+        @Html.ValidationMessageFor(i => i.SelectionIngredients, "", new { @class = "text-danger"})
     </div>

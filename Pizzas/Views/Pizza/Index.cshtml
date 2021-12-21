@@ -19,7 +19,7 @@
                 @Html.DisplayNameFor(model => model.Nom)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Pate)
+                @Html.DisplayNameFor(model => model.Pate.Nom)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Ingredients)
@@ -43,6 +43,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Ingredients)
             </td>
+@*            <td>
+                @foreach (var ingredient in item.Ingredients)
+                {
+                    @Html.DisplayFor(modelItem => item.Ingredients[item.Id].Nom.ToString().ToArray())
+                }
+            </td>*@
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
                 @Html.ActionLink("Details", "Details", new { id=item.Id }) |

@@ -19,7 +19,7 @@ namespace Pizzas.Controllers
         {
             Random random = new Random();
             List<Ingredient> ingredientAleatoire = new List<Ingredient>();
-            for (int j = 0; j < random.Next(2, 5); j++)
+            for (int j = 0; j < random.Next(3, 6); j++)
             {
                 ingredientAleatoire.Add(Pizza.IngredientsDisponibles.Find(a => a.Id == random.Next(1, Pizza.IngredientsDisponibles.Count)));
             }
@@ -35,28 +35,28 @@ namespace Pizzas.Controllers
                 pizzas = new List<Pizza> 
                 {
                     new Pizza {Id = i++, Nom = "Margherita", Pate = pates[random.Next(1, 4)], Ingredients = Aleatoire() },
-                    //new Pizza {Id = i++, Nom = "Reine", Pate = pates[random.Next(1, 4)]},
-                    //new Pizza {Id = i++, Nom = "Napolitaine", Pate = pates[random.Next(1, 4)]},
-                    //new Pizza {Id = i++, Nom = "Calzone", Pate = pates[random.Next(1, 4)]},
-                    //new Pizza {Id = i++, Nom = "Royale", Pate = pates[random.Next(1, 4)]},
-                    //new Pizza {Id = i++, Nom = "Veggie", Pate = pates[random.Next(1, 4)]},
-                    //new Pizza {Id = i++, Nom = "Paysanne", Pate = pates[new Random().Next(1, 4)]},
-                    //new Pizza {Id = i++, Nom = "Forestière", Pate = pates[new Random().Next(1, 4)]},
-                    //new Pizza {Id = i++, Nom = "Alsacienne", Pate = pates[new Random().Next(1, 4)]},
-                    //new Pizza {Id = i++, Nom = "Savoyarde", Pate = pates[new Random().Next(1, 4)]},
-                    //new Pizza {Id = i++, Nom = "L’Angevine", Pate = pates[new Random().Next(1, 4)]},
-                    //new Pizza {Id = i++, Nom = "Di Roma", Pate = pates[new Random().Next(1, 4)]},
-                    //new Pizza {Id = i++, Nom = "Capri", Pate = pates[new Random().Next(1, 4)]},
-                    //new Pizza {Id = i++, Nom = "Ankara", Pate = pates[new Random().Next(1, 4)]},
-                    //new Pizza {Id = i++, Nom = "Oslo", Pate = pates[new Random().Next(1, 4)]},
-                    //new Pizza {Id = i++, Nom = "Hawaï", Pate = pates[new Random().Next(1, 4)]},
-                    //new Pizza {Id = i++, Nom = "Nador", Pate = pates[new Random().Next(1, 4)]},
-                    //new Pizza {Id = i++, Nom = "Cagliari", Pate = pates[new Random().Next(1, 4)]},
-                    //new Pizza {Id = i++, Nom = "Bolzano", Pate = pates[new Random().Next(1, 4)]},
-                    //new Pizza {Id = i++, Nom = "Loguivy", Pate = pates[new Random().Next(1, 4)]},
-                    //new Pizza {Id = i++, Nom = "Ogre", Pate = pates[new Random().Next(1, 4)]},
-                    //new Pizza {Id = i++, Nom = "London", Pate = pates[new Random().Next(1, 4)]},
-                    //new Pizza {Id = i++, Nom = "Liverpool", Pate = pates[new Random().Next(1, 4)]}
+                    new Pizza {Id = i++, Nom = "Reine", Pate = pates[random.Next(1, 4)], Ingredients = Aleatoire() },
+                    new Pizza {Id = i++, Nom = "Napolitaine", Pate = pates[random.Next(1, 4)], Ingredients = Aleatoire() },
+                    new Pizza {Id = i++, Nom = "Calzone", Pate = pates[random.Next(1, 4)], Ingredients = Aleatoire() },
+                    new Pizza {Id = i++, Nom = "Royale", Pate = pates[random.Next(1, 4)], Ingredients = Aleatoire() },
+                    new Pizza {Id = i++, Nom = "Veggie", Pate = pates[random.Next(1, 4)], Ingredients = Aleatoire() },
+                    new Pizza {Id = i++, Nom = "Paysanne", Pate = pates[new Random().Next(1, 4)], Ingredients = Aleatoire() },
+                    new Pizza {Id = i++, Nom = "Forestière", Pate = pates[new Random().Next(1, 4)], Ingredients = Aleatoire() },
+                    new Pizza {Id = i++, Nom = "Alsacienne", Pate = pates[new Random().Next(1, 4)], Ingredients = Aleatoire() },
+                    new Pizza {Id = i++, Nom = "Savoyarde", Pate = pates[new Random().Next(1, 4)], Ingredients = Aleatoire() },
+                    new Pizza {Id = i++, Nom = "L’Angevine", Pate = pates[new Random().Next(1, 4)], Ingredients = Aleatoire() },
+                    new Pizza {Id = i++, Nom = "Di Roma", Pate = pates[new Random().Next(1, 4)], Ingredients = Aleatoire() },
+                    new Pizza {Id = i++, Nom = "Capri", Pate = pates[new Random().Next(1, 4)], Ingredients = Aleatoire() },
+                    new Pizza {Id = i++, Nom = "Ankara", Pate = pates[new Random().Next(1, 4)], Ingredients = Aleatoire() },
+                    new Pizza {Id = i++, Nom = "Oslo", Pate = pates[new Random().Next(1, 4)], Ingredients = Aleatoire() },
+                    new Pizza {Id = i++, Nom = "Hawaï", Pate = pates[new Random().Next(1, 4)], Ingredients = Aleatoire() },
+                    new Pizza {Id = i++, Nom = "Nador", Pate = pates[new Random().Next(1, 4)], Ingredients = Aleatoire() },
+                    new Pizza {Id = i++, Nom = "Cagliari", Pate = pates[new Random().Next(1, 4)], Ingredients = Aleatoire() },
+                    new Pizza {Id = i++, Nom = "Bolzano", Pate = pates[new Random().Next(1, 4)], Ingredients = Aleatoire() },
+                    new Pizza {Id = i++, Nom = "Loguivy", Pate = pates[new Random().Next(1, 4)], Ingredients = Aleatoire() },
+                    new Pizza {Id = i++, Nom = "Ogre", Pate = pates[new Random().Next(1, 4)], Ingredients = Aleatoire() },
+                    new Pizza {Id = i++, Nom = "London", Pate = pates[new Random().Next(1, 4)], Ingredients = Aleatoire() },
+                    new Pizza {Id = i++, Nom = "Liverpool", Pate = pates[new Random().Next(1, 4)], Ingredients = Aleatoire() }
                 };
             }
         }
@@ -98,11 +98,25 @@ namespace Pizzas.Controllers
             {
                 if (pizzaVM != null && ModelState.IsValid)
                 {
+                    // On créer une pizza vide qu'on va remplir avec les données issues de la VM, identifiés par index
                     var pizzaDb = new Pizza();
-                    //pizzaDb.Id = pizzas.Count + 1;
+                    var listeIngredientsVM = pizzaVM.SelectionIngredients;
+                    var pateVM = pates[pizzaVM.SelectionPate];
+
+                    // On remplis une liste d'ingrédients pour chaque valeur d'index retournées par la vue
+                    List<Ingredient> listeIngredients = new();
+                    foreach (var i in listeIngredientsVM)
+                    {
+                        listeIngredients.Add(ingredients[i]);
+                    }
+
+                    // On remplis la nouvelle pizza vierge
+                    pizzaDb.Id = pizzas.Count + 1;
                     pizzaDb.Nom = pizzaVM.Nom;
-                    //pizzaDb.Pate = pizzaVM.SelectionPate;
-                    //pizzaDb.Ingredients = pizzaVM.SelectionIngredients;
+                    pizzaDb.Pate = pateVM;
+                    pizzaDb.Ingredients = listeIngredients;
+
+                    // Et on ajoute la nouvelle pizza à la liste
                     pizzas.Add(pizzaDb);
                     return RedirectToAction(nameof(Index));
                 }
@@ -129,12 +143,14 @@ namespace Pizzas.Controllers
         // POST: PizzaController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Pizza pizza)
+        public ActionResult Edit(PizzaVM pizzaVM)
         {
             try
             {
-                if (ModelState.IsValid)
+                if (pizzaVM != null && ModelState.IsValid)
                 {
+
+                    // ***************************************************************
                     var pizzaVM = new PizzaVM();
 
                     var pizzaDb = pizzas.FirstOrDefault(p => p.Id == pizza.Id);

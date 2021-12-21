@@ -11,13 +11,22 @@ namespace DemoDbContext2
         static void Main(string[] args)
         {
             var context = new Context();
+
+            var adresse1 = new Adresse { Nom = "Cul-de-Sac", Numero = 1 };
+            var adresse2 = new Adresse { Nom = "Fondcombe", Numero = 5 };
+            //On assigne l'adresse1 a la personne qui a l'Id 1
+            context.Personnes.FirstOrDefault(p => p.Id == 1).Adresse = adresse1;
+            context.Personnes.FirstOrDefault(p => p.Id == 2).Adresse = adresse2;
+            // Sauvegarder les modifs
+            context.SaveChanges();
+
             foreach (var personne in context.Personnes)
             {
-                Console.WriteLine($"Nom: {personne.Nom}, Prenom: {personne.Prenom}");
+                Console.WriteLine($"Nom: {personne.Nom}, Prenom: {personne.Prenom}, Adresse:{personne.Adresse}");
             }
             if (!context.Personnes.Any())
             {
-                context.Personnes.Add(new Personne { Nom = "TRUMP", Prenom = "Donald" });
+                context.Personnes.Add(new Personne { Nom = "SAQUET", Prenom = "Frodon" });
                 context.SaveChanges();
                 Console.WriteLine("Une personne ajoutée.");
             }

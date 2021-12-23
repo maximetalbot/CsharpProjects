@@ -82,27 +82,24 @@ namespace LeDojo.Controllers
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(SamouraiVM samouraiVM)
+        public ActionResult Edit(SamouraiVM samouraiVM, int id)
         {
             if (ModelState.IsValid)
             {
-                // on vérifie qu'une arme ai été choisie
-                //if (samouraiVM.SelectionArme.HasValue)
-                //{
-                //    // on assigne l'arme dont l'Id à été choisi au samouraï
-                //    samouraiVM.Samourai.Arme = db.Armes.FirstOrDefault(a => a.Id == samouraiVM.SelectionArme.Value);
-                //}
-                //var samouraiVM = new SamouraiVM();
-                //var samourai = db.Samourais.FirstOrDefault(a => a.Id);
+                if (samouraiVM.SelectionArme.HasValue)
+                {
+                    samouraiVM.Samourai.Arme = db.Armes.FirstOrDefault(a => a.Id == samouraiVM.SelectionArme.Value);
+                }
 
-                //samouraiVM.Samourai.Arme = db.Armes.FirstOrDefault(a => a.Id == samouraiVM.SelectionArme.Value);
-                //db.Entry(samouraiVM).State = EntityState.Modified;
+                var updateSamourai = db.Samourais.Find(id);
+                updateSamourai.Nom = samouraiVM.Samourai.Nom;
+                updateSamourai.Force = samouraiVM.Samourai.Force;
+                updateSamourai.Arme = samouraiVM.Samourai.Arme;
 
-                samouraiVM.Samourai = db.Samourais.Find(samouraiVM.Samourai.Id);
-                db.Samourais.Add(samouraiVM.Samourai);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            samouraiVM.ListeArmes = db.Armes.ToList();
             return View(samouraiVM);
         }
 

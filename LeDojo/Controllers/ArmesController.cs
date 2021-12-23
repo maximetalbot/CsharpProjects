@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using BO;
 using LeDojo.Data;
+using LeDojo.Models;
 
 namespace LeDojo.Controllers
 {
@@ -110,7 +111,14 @@ namespace LeDojo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            // Supression de la liaison, retire l'arme des samourais qui en sont équipés
             Arme arme = db.Armes.Find(id);
+            var samourais = db.Samourais.Where(a => a.Arme.Id == id).ToList();
+            foreach(var s in samourais)
+            {
+                s.Arme = null;
+            }
+            // Retire l'arme de la base de données
             db.Armes.Remove(arme);
             db.SaveChanges();
             return RedirectToAction("Index");

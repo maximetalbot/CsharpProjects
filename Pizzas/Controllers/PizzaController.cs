@@ -155,7 +155,7 @@ namespace Pizzas.Controllers
 
                     var pizzaDb = pizzas.FirstOrDefault(p => p.Id == pizza.Id);
 
-                    List<Ingredient> ListeIngredients = pizza.Ingredients;
+                    List<Ingredient> ListeIngredients = pizzaVM.Ingredients;
 
                     pizzaDb.Nom = pizza.Nom;
                     pizzaDb.Pate = pizza.Pate;

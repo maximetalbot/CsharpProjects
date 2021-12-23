@@ -14,4 +14,5 @@ namespace Pizzas.Models
         public List<int> SelectionIngredients { get; set; }
 
     }
+
 }

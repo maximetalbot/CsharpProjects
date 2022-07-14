@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FakeTweeter.MainPage">
+
+    <StackLayout>
+        <ContentView BackgroundColor="#2196F3" Padding="10,25,10,25">
+            <StackLayout Orientation="Vertical">
+                <StackLayout Orientation="Horizontal">
+                    <ImageButton Source="pencil.png" BackgroundColor="transparent" WidthRequest="25" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"></ImageButton>
+                    <Label Text="Accueil" FontAttributes="Bold" FontSize="20" TextColor="White" 
+                           HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+                    <ImageButton Source="search.png" BackgroundColor="transparent" WidthRequest="25" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"></ImageButton>
+                </StackLayout>
+            </StackLayout>
+        </ContentView>
+
+        <ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand" BackgroundColor="GhostWhite">
+            <ContentView>
+                <StackLayout Padding="10,10,10,10">
+                    <!-- Formulaire -->
+                    <StackLayout x:Name="formulaire" Orientation="Vertical" IsVisible="True">
+                        <Label Text="Connexion à Woofer" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"></Label>
+                        <Entry x:Name="identifiant" Placeholder="Identifiant"></Entry>
+                        <Entry x:Name="motdepasse" Placeholder="Mot de passe" IsPassword="True"></Entry>
+                        <StackLayout Orientation="Horizontal">
+                            <Switch x:Name="sesouvenir"></Switch>
+                            <Label Text="Mémoriser mes informations"></Label>
+                        </StackLayout>
+                        <!-- Affichage de messages d'erreur, désactivé par défaut -->
+                        <Label x:Name="erreur"  TextColor="Red" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" IsVisible="False"></Label>
+                        <Button Text="Se connecter" Clicked="SeConnecter_Clicked"></Button>
+                    </StackLayout>
+
+                    <ListView x:Name="tweetList" IsVisible="false" ItemSelected="tweetList_ItemSelected" HasUnevenRows="True" RowHeight="-1">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <!-- <Frame BackgroundColor="AntiqueWhite" CornerRadius="10" OutlineColor="Goldenrod"> -->
+                                        <StackLayout Orientation="Vertical" BackgroundColor="AliceBlue" Margin="10">
+                                            <StackLayout Orientation="Horizontal" BackgroundColor="LightSteelBlue">
+                                                <Image Source="{Binding avatar}" WidthRequest="75"></Image>
+                                                <StackLayout Orientation="Vertical">
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Text="{Binding pseudoUtilisateur}"></Label>
+                                                        <Label Text="{Binding idUtilisateur}"></Label>
+                                                    </StackLayout>
+                                                    <Label Text="{Binding texte}"></Label>
+                                                </StackLayout>
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal">
+                                                <ImageButton Source="answer.png" BackgroundColor="transparent" WidthRequest="25" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"></ImageButton>
+                                                <ImageButton Source="retweet.png" BackgroundColor="transparent" WidthRequest="25" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"></ImageButton>
+                                                <ImageButton Source="bookmark.png" BackgroundColor="transparent" WidthRequest="25" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"></ImageButton>
+                                            </StackLayout>
+
+                                        </StackLayout>
+                                    <!-- </Frame> -->
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </ContentView>
+        </ScrollView>
+        <!-- NavBar -->
+        <StackLayout Orientation="Horizontal">
+            <Switch x:Name="internet" IsToggled="False" Toggled="Internet_Toggle" OnColor="LimeGreen" HorizontalOptions="StartAndExpand"></Switch>
+            <Label Text="Activer internet" HorizontalOptions="StartAndExpand"></Label>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal" Padding="5,5,5,5">
+            <Label Text="Fil" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"></Label>
+            <Label Text="Notifications" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"></Label>
+            <Label Text="Messages" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"></Label>
+            <Label Text="Moi" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"></Label>
+        </StackLayout>
+    </StackLayout>
+
+    <!--
+    <StackLayout x:Name="fil" Padding="10" Orientation="Vertical" IsVisible="False" >
+
+	    <Frame BackgroundColor="AntiqueWhite" CornerRadius="10" OutlineColor="Goldenrod">
+		    <StackLayout x:Name="tweet" Orientation="Vertical" BackgroundColor="Ivory" >
+			    <StackLayout Orientation="Horizontal">
+				    <ImageButton x:Name="tweetPhoto" BackgroundColor="transparent" Source="ppSeptime.png" WidthRequest="90" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"></ImageButton>
+				    <StackLayout Orientation="Vertical">
+					    <StackLayout Orientation="Horizontal">
+						    <Label x:Name="tweetNomUtilisateur" Text="Septimus" FontAttributes="Bold"></Label>
+						    <Label x:Name="tweetPseudoUtilisateur" Text="@septimus" FontAttributes="Italic"></Label>
+						    <Label Text="50s" HorizontalOptions="EndAndExpand" TextColor="DarkGoldenrod"></Label>
+					    </StackLayout>
+					    <StackLayout x:Name="tweetTexte" Orientation="Horizontal">
+						    <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" 
+							        Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim.">
+						    </Label>
+					    </StackLayout>
+				    </StackLayout>
+			    </StackLayout>
+			    <StackLayout Orientation="Horizontal">
+				    <ImageButton Source="answer.png" BackgroundColor="transparent" WidthRequest="25" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"></ImageButton>
+				    <ImageButton Source="retweet.png" BackgroundColor="transparent" WidthRequest="25" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"></ImageButton>
+				    <ImageButton Source="bookmark.png" BackgroundColor="transparent" WidthRequest="25" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"></ImageButton>
+			    </StackLayout>
+			    <StackLayout>
+				    <Line Stroke="DarkGoldenrod" X1="0" X2="1000"></Line>
+			    </StackLayout>
+		    </StackLayout>
+	    </Frame>
+    </StackLayout>
+    -->
+</ContentPage>
